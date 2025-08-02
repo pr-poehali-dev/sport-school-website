@@ -12,6 +12,8 @@ import Icon from '@/components/ui/icon';
 const Index = () => {
   const [accessibilityMode, setAccessibilityMode] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const news = [
     {
@@ -56,6 +58,36 @@ const Index = () => {
     { title: "Вакансии", content: "Требуются: тренер по футболу (высшее образование), медицинский работник (среднее специальное образование)." }
   ];
 
+  const galleryImages = [
+    { id: 1, src: "/img/e6e0d7fb-251a-4356-ba73-f249e6f1f9c3.jpg", category: "team", title: "Команда сезона 2024" },
+    { id: 2, src: "/img/c8c98bff-3808-476f-b3e5-7e6a5b969fb9.jpg", category: "training", title: "Тренировочный процесс" },
+    { id: 3, src: "/img/f0529f05-344f-42c2-90b6-a4128b5b6d81.jpg", category: "achievements", title: "Церемония награждения" },
+    { id: 4, src: "/img/bf8adfa5-0242-4f0d-9e7e-4d8408128ad3.jpg", category: "facilities", title: "Спортивный зал" },
+    { id: 5, src: "/img/19a62bc6-1968-427f-82b3-5b4ca210b608.jpg", category: "training", title: "Отработка техники" },
+    { id: 6, src: "/img/8c98fd08-3d9f-4c33-b54a-bf2c5d9e265b.jpg", category: "team", title: "Подготовка к матчу" },
+    { id: 7, src: "/img/00ae3963-ea40-4f74-bf15-3048d3b4ff77.jpg", category: "training", title: "Полевые тренировки" },
+    { id: 8, src: "/img/51add1db-0110-4bb7-9846-a17f525717ea.jpg", category: "facilities", title: "Футбольное поле" }
+  ];
+
+  const videos = [
+    { id: 1, title: "Тренировка юниоров", thumbnail: "/img/c8c98bff-3808-476f-b3e5-7e6a5b969fb9.jpg", duration: "3:45" },
+    { id: 2, title: "Лучшие голы сезона", thumbnail: "/img/f0529f05-344f-42c2-90b6-a4128b5b6d81.jpg", duration: "5:20" },
+    { id: 3, title: "День открытых дверей", thumbnail: "/img/e6e0d7fb-251a-4356-ba73-f249e6f1f9c3.jpg", duration: "8:15" },
+    { id: 4, title: "Мастер-класс от тренеров", thumbnail: "/img/19a62bc6-1968-427f-82b3-5b4ca210b608.jpg", duration: "12:30" }
+  ];
+
+  const categories = [
+    { id: 'all', name: 'Все фото' },
+    { id: 'team', name: 'Команда' },
+    { id: 'training', name: 'Тренировки' },
+    { id: 'achievements', name: 'Достижения' },
+    { id: 'facilities', name: 'Объекты' }
+  ];
+
+  const filteredImages = selectedCategory === 'all' 
+    ? galleryImages 
+    : galleryImages.filter(img => img.category === selectedCategory);
+
   useEffect(() => {
     document.body.className = accessibilityMode ? 'accessibility-mode' : '';
   }, [accessibilityMode]);
@@ -92,6 +124,7 @@ const Index = () => {
           <nav className="hidden md:flex gap-6">
             <a href="#news" className="hover:underline">Новости</a>
             <a href="#about" className="hover:underline">О школе</a>
+            <a href="#gallery" className="hover:underline">Галерея</a>
             <a href="#info" className="hover:underline">Сведения</a>
             <a href="#contacts" className="hover:underline">Контакты</a>
           </nav>
@@ -175,6 +208,107 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className={`py-16 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Фотогалерея</h2>
+          
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {categories.map((category) => (
+              <Button
+                key={category.id}
+                variant={selectedCategory === category.id ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`${accessibilityMode ? 'border-yellow-400' : ''}`}
+              >
+                {category.name}
+              </Button>
+            ))}
+          </div>
+
+          {/* Photo Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredImages.map((image) => (
+              <div
+                key={image.id}
+                className="group cursor-pointer overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
+                onClick={() => setSelectedImage(image.src)}
+              >
+                <div className="relative aspect-square">
+                  <img
+                    src={image.src}
+                    alt={image.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300 flex items-center justify-center">
+                    <Icon name="ZoomIn" size={32} className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-sm">{image.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Video Gallery */}
+      <section className="py-16 px-6">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">Видеогалерея</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {videos.map((video) => (
+              <Card key={video.id} className={`group cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105 ${accessibilityMode ? 'bg-gray-800 border-yellow-400' : ''}`}>
+                <CardContent className="p-0">
+                  <div className="relative">
+                    <img
+                      src={video.thumbnail}
+                      alt={video.title}
+                      className="w-full h-48 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-60 transition-opacity duration-300">
+                      <Icon name="Play" size={48} className="text-white" />
+                    </div>
+                    <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                      {video.duration}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-sm">{video.title}</h3>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-full">
+            <img
+              src={selectedImage}
+              alt="Увеличенное изображение"
+              className="max-w-full max-h-full object-contain"
+            />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-4 right-4 text-white hover:bg-white hover:bg-opacity-20"
+              onClick={() => setSelectedImage(null)}
+            >
+              <Icon name="X" size={24} />
+            </Button>
+          </div>
+        </div>
+      )}
 
       {/* Organization Info */}
       <section id="info" className="py-16 px-6">
