@@ -61,6 +61,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				sport: {
+					blue: '#2563EB',
+					red: '#F2937',
+					green: '#16A34A',
+					gray: '#6B7280'
 				}
 			},
 			borderRadius: {
