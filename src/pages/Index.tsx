@@ -132,22 +132,22 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className={`py-20 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gradient-to-r from-black to-secondary'} text-primary`}>
+      <section className={`py-12 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gradient-to-r from-black to-secondary'} text-primary`}>
         <div className="container mx-auto text-center">
-          <h2 className="text-5xl font-bold mb-6">Футбольная школа будущих чемпионов</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4">Футбольная школа будущих чемпионов</h2>
+          <p className="text-lg mb-6 max-w-2xl mx-auto">
             Развиваем талант, воспитываем характер, готовим профессиональных футболистов
           </p>
-          <Button size="lg" variant={accessibilityMode ? "default" : "secondary"} className="text-lg px-8 py-4">
+          <Button size="default" variant={accessibilityMode ? "default" : "secondary"} className="px-6 py-2">
             Записаться на тренировку
           </Button>
         </div>
       </section>
 
       {/* News Section */}
-      <section id="news" className="py-16 px-6">
+      <section id="news" className="py-12 px-6">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Новости школы</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Новости школы</h2>
           <Carousel className="max-w-4xl mx-auto">
             <CarouselContent>
               {news.map((item) => (
@@ -176,18 +176,18 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className={`py-16 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <section id="about" className={`py-12 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-6">О нашей школе</h2>
-              <p className="text-lg mb-4">
+              <h2 className="text-2xl font-bold mb-4">О нашей школе</h2>
+              <p className="mb-3">
                 ДЮСШ "Торпедо" - ведущая футбольная школа региона с 30-летней историей подготовки профессиональных спортсменов.
               </p>
-              <p className="mb-6">
+              <p className="mb-4">
                 Мы предлагаем качественное футбольное образование для детей от 6 до 18 лет, сочетая современные методики тренировок с индивидуальным подходом к каждому ученику.
               </p>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className={`text-2xl font-bold ${accessibilityMode ? 'text-yellow-400' : 'text-primary'}`}>500+</div>
                   <div className="text-sm">Выпускников</div>
@@ -210,12 +210,12 @@ const Index = () => {
       </section>
 
       {/* Gallery Section */}
-      <section id="gallery" className={`py-16 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <section id="gallery" className={`py-12 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Фотогалерея</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Фото и видео</h2>
           
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
             {categories.map((category) => (
               <Button
                 key={category.id}
@@ -229,7 +229,7 @@ const Index = () => {
           </div>
 
           {/* Photo Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
             {filteredImages.map((image) => (
               <div
                 key={image.id}
@@ -255,11 +255,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Video Gallery */}
-      <section className="py-16 px-6">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Видеогалерея</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Video Gallery */}
+          <h3 className="text-xl font-bold text-center mb-6">Видео</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {videos.map((video) => (
               <Card key={video.id} className={`group cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105 ${accessibilityMode ? 'bg-gray-800 border-yellow-400' : ''}`}>
                 <CardContent className="p-0">
@@ -311,9 +309,9 @@ const Index = () => {
       )}
 
       {/* Organization Info */}
-      <section id="info" className="py-16 px-6">
+      <section id="info" className="py-12 px-6">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Сведения об образовательной организации</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Сведения об организации</h2>
           <Accordion type="single" collapsible className="max-w-4xl mx-auto">
             {organizationInfo.map((item, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
@@ -330,11 +328,11 @@ const Index = () => {
       </section>
 
       {/* Contact Form */}
-      <section id="contacts" className={`py-16 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <section id="contacts" className={`py-12 px-6 ${accessibilityMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Контактная информация</h2>
+              <h2 className="text-2xl font-bold mb-4">Контакты</h2>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Icon name="MapPin" size={20} />
@@ -390,7 +388,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className={`py-8 px-6 ${accessibilityMode ? 'bg-black border-t border-yellow-400' : 'bg-primary text-white'}`}>
+      <footer className={`py-6 px-6 ${accessibilityMode ? 'bg-black border-t border-yellow-400' : 'bg-primary text-white'}`}>
         <div className="container mx-auto text-center">
           <p>&copy; 2024 ДЮСШ "Торпедо". Все права защищены.</p>
         </div>
